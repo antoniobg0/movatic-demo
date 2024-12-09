@@ -9,7 +9,7 @@ you need to have installed docker.
 ## Installation
 ```bash
 # Add installation steps here
-docker compose -p movatic up -d --build
+docker compose -p movatic up -d
 ```
 
 ## Usage

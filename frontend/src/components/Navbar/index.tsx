@@ -1,12 +1,7 @@
-import React from "react";
 import {
   Disclosure,
   DisclosureButton,
-  DisclosurePanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems
+  DisclosurePanel
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
@@ -44,7 +39,6 @@ const Navbar = () => {
               <span className="sr-only">View notifications</span>
               <BellIcon aria-hidden="true" className="size-6" />
             </button>
-
           </div>
         </div>
       </div>
