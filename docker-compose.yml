@@ -1,0 +1,49 @@
+version: "3.8"
+
+name: movatic
+
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "7001:7001"
+    depends_on:
+      - redis
+    environment:
+      - CACHE_TYPE=redis
+      - CACHE_REDIS_HOST=redis
+      - CACHE_REDIS_PORT=6379
+      - CACHE_REDIS_DB=0
+      - CACHE_REDIS_URL=redis://redis:6379/0
+      - FLASK_ENV=development
+    volumes:
+      - ./api:/app
+    networks:
+      - mavatic_network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - VITE_API_URL=http://localhost:7001/api/
+    networks:
+      - mavatic_network
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+    networks:
+      - mavatic_network
+
+networks:
+  mavatic_network:
+    driver: bridge
